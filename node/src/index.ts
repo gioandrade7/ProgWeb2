@@ -11,7 +11,6 @@ const server = createServer( async (req, res) => {
     const files = await readdir(DIR);
 
     if(req.url === "/"){
-        const files = await readdir(DIR);
         res.write(files.map(file => createLink(file)).join(""))
         res.end()
     }

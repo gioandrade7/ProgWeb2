@@ -1,0 +1,17 @@
+{
+  "name": "lorem",
+  "version": "1.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": " nodemon --watch 'src' --exec 'npx ts-node ./src/index.ts' --ext ts,js",
+    "build": "tsc",
+    "start:prod": "node build/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.10.8"
+  }
+}
