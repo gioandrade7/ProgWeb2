@@ -1,8 +1,7 @@
-npm install 
 if [ "$NODE_ENV" = "production" ]; then
   echo "API inicializada em ambiente de produção"
-  npm start
+  npm stard:prod
 else
   echo "API inicializada em ambiente de desenvolvimento"
-  npm run dev
+  npm run start
 fi
