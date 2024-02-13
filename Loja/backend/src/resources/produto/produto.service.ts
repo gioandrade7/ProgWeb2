@@ -15,3 +15,7 @@ export const createProduto = async (produto: CreateProdutoDTO): Promise<Produto>
     return await prisma.produto.create({data: produto})
 }
 
+export const readProduto = async (id: string): Promise<Produto | null> =>{
+    return await prisma.produto.findUnique({ where: { id } })
+}
+
