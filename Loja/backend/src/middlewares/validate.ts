@@ -9,8 +9,8 @@ const validate = (schema: ObjectSchema) => {
         })
         if(error) {
             return res.status(StatusCodes.BAD_REQUEST).json(error.details)
-            next()
         }
+        else next();
     }
 }
 

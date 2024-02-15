@@ -35,7 +35,6 @@ const create= async(req: Request, res: Response) => {
   }
 }
 
-
 const read= async(req: Request, res: Response) => {
   const { id } = req.params
   try{
