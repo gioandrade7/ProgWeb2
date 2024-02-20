@@ -1,6 +1,6 @@
 import {Response, Request} from "express"
-import { createProduto, listProduto, produtoAlreadyExists, readProduto } from "./produto.service";
-import { CreateProdutoDTO } from "./produto.types";
+import { createProduto, updateProduto, listProduto, produtoAlreadyExists, readProduto, removeProduto } from "./produto.service";
+import { CreateProdutoDTO, UpdateProdutoDTO } from "./produto.types";
 import {
   ReasonPhrases,
   StatusCodes,
@@ -35,6 +35,26 @@ const create= async(req: Request, res: Response) => {
   }
 }
 
+const update = async(req: Request, res: Response) => {
+  const { id } = req.params;
+  const produtoAntigo = await readProduto(id)
+  const produtoNovo: UpdateProdutoDTO = req.body;
+  
+  try {
+    if ((await produtoAlreadyExists(produtoNovo.nome) && produtoAntigo?.nome === produtoNovo.nome) || (!(await produtoAlreadyExists(produtoNovo.nome)))){
+      const novoProduto = await updateProduto(id, produtoNovo);
+      res.status(StatusCodes.OK).json(novoProduto);
+      
+    }
+    else{
+      res.status(StatusCodes.CONFLICT).json(ReasonPhrases.CONFLICT);
+    }
+  } 
+  catch (error) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error)
+  }
+}
+
 const read= async(req: Request, res: Response) => {
   const { id } = req.params
   try{
@@ -48,7 +68,15 @@ const read= async(req: Request, res: Response) => {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
   }
 }
-const update = async(req: Request, res: Response) => {}
-const remove = async(req: Request, res: Response) => {}
+
+const remove = async(req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const produto = removeProduto(id)
+    return res.status(StatusCodes.OK).json(produto);
+  } catch (err) {
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+  }
+}
 
 export default {create, index, update, remove, read}

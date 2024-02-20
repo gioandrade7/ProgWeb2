@@ -2,7 +2,7 @@
 CREATE TABLE `produtos` (
     `id` CHAR(40) NOT NULL,
     `nome` VARCHAR(100) NOT NULL,
-    `preco` DECIMAL NOT NULL,
+    `preco` DECIMAL(10, 0) NOT NULL,
     `estoque` INTEGER NOT NULL,
     `created_at` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updated_at` DATETIME(3) NOT NULL,
@@ -10,3 +10,4 @@ CREATE TABLE `produtos` (
     UNIQUE INDEX `produtos_nome_key`(`nome`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
