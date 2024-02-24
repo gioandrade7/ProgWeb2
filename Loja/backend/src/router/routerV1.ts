@@ -7,10 +7,26 @@ import authRouter from "../resources/auth/auth.router"
 
 const router = Router();
 
-router.use("/", authRouter)
-router.use("/exercicio", exercicioRouter);
-router.use("/produto", produtoRouter);
-router.use("/language", languageRouter);
-router.use("/usuario", usuarioRouter)
+router.use(
+  "/", 
+   // #swagger.tags = ['Auth']
+  authRouter
+);
+
+router.use("/exercicio", 
+// #swagger.tags = ['Exercicio']
+exercicioRouter);
+
+router.use("/produto", 
+// #swagger.tags = ['Produto']
+produtoRouter);
+
+router.use("/language", 
+// #swagger.tags = ['Language']
+languageRouter);
+
+router.use("/usuario", 
+// #swagger.tags = ['Usuários']
+usuarioRouter)
 
 export default router;

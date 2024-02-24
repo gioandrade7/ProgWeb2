@@ -21,6 +21,7 @@ const login = async (req: Request, res: Response) => {
     const credentials = req.body as LoginDTO
     try {
         const usuario = await checkCredentials(credentials)
+        console.log(usuario)
         if(! usuario) return res.status(StatusCodes.UNAUTHORIZED).json(ReasonPhrases.UNAUTHORIZED);
         req.session.uid = usuario.id
         req.session.tipoUsuarioId = usuario.tipoUsuarioId
@@ -31,10 +32,13 @@ const login = async (req: Request, res: Response) => {
     }
 }
 const logout = (req: Request, res: Response) => {
-    req.session.destroy((err) => {
-        if(err) res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
+    if (!req.session.uid) return res
+      .status(StatusCodes.UNAUTHORIZED)
+      .json(ReasonPhrases.UNAUTHORIZED);
+      req.session.destroy((err) => {
+        if (err) res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);
         res.status(StatusCodes.OK).json(ReasonPhrases.OK);
-    })
+      });
 }
 
 

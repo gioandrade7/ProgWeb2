@@ -4,6 +4,8 @@ import morgan from "morgan";
 import cookieParser from 'cookie-parser';
 import { v4 as uuidv4} from "uuid"
 import session from 'express-session';
+import swaggerUi from "swagger-ui-express";
+import swaggerFile from "./swagger-output.json";
 
 import validateEnv from "./utils/validateEnv";
 import router from "./router";
@@ -34,6 +36,8 @@ app.use(
     saveUninitialized: true
   })
 );
+
+app.use("/api", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 app.use(router);
 
 app.use('/img', express.static(`${__dirname}/../public/img`));
