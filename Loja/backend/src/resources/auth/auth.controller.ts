@@ -21,11 +21,10 @@ const login = async (req: Request, res: Response) => {
     const credentials = req.body as LoginDTO
     try {
         const usuario = await checkCredentials(credentials)
-        console.log(usuario)
         if(! usuario) return res.status(StatusCodes.UNAUTHORIZED).json(ReasonPhrases.UNAUTHORIZED);
         req.session.uid = usuario.id
         req.session.tipoUsuarioId = usuario.tipoUsuarioId
-        res.status(StatusCodes.OK).json(ReasonPhrases.OK)
+        res.status(StatusCodes.OK).json(req.session.uid)
     } 
     catch (error) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);

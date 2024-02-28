@@ -10,11 +10,15 @@ import swaggerFile from "./swagger-output.json";
 import validateEnv from "./utils/validateEnv";
 import router from "./router";
 import setCookieLang from './middlewares/setCookieLanguage';
+import { CompraItem } from '@prisma/client';
+import { AddProdutoDTO } from './resources/compra/compra.types';
+
 
 declare module "express-session" {
   interface SessionData {
-    uid: string,
+    uid: string;
     tipoUsuarioId: string
+    carrinho: AddProdutoDTO[]
   }
 }
 

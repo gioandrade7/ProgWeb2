@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { TiposUsuarios } from "./../src/resources/tipoUsuario/tipoUsuario.constants";
+import { TiposUsuarios } from "../src/resources/tipoUsuario/tipoUsuario.constants";
 
 const prisma = new PrismaClient();
 

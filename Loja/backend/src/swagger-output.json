@@ -50,6 +50,49 @@
         }
       }
     },
+    "/v1/compra/addCarrinho": {
+      "post": {
+        "tags": [
+          "Compra"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "produtoId": {
+                  "example": "any"
+                },
+                "quantidade": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/v1/compra/realizarCompra": {
+      "post": {
+        "tags": [
+          "Compra"
+        ],
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/v1/exercicio/": {
       "get": {
         "tags": [
