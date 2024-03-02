@@ -19,11 +19,11 @@ export const updateProduto = async (id: string, produto: UpdateProdutoDTO): Prom
     return await prisma.produto.update({ where: { id }, data: produto });
 }
 
-export const readProduto = async (id: string): Promise<Produto | null> =>{
+export const readProduto = async (id: string): Promise <Produto | null> =>{
     return await prisma.produto.findUnique({ where: { id } })
 }
 
-export const removeProduto = async (id: string): Promise<Produto> =>{
-    return await prisma.produto.delete({ where: { id } })
+export const removeProduto = async (id: string): Promise<void> =>{
+    await prisma.produto.delete({ where: { id } })
 }
 

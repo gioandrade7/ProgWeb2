@@ -72,7 +72,7 @@ const read= async(req: Request, res: Response) => {
 const remove = async(req: Request, res: Response) => {
   const { id } = req.params;
   try {
-    const produto = removeProduto(id)
+    const produto = await removeProduto(id)
     return res.status(StatusCodes.OK).json(produto);
   } catch (err) {
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(err);

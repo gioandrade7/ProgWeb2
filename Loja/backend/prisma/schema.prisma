@@ -24,7 +24,7 @@ model Usuario {
   nome String @db.VarChar(100)
   email String @unique @db.VarChar(100)
   senha String @db.VarChar(100)
-  tipoUsuario TipoUsuario @relation(fields: [tipoUsuarioId], references: [id])
+  tipoUsuario TipoUsuario @relation(fields: [tipoUsuarioId], references: [id], onDelete: Cascade)
   tipoUsuarioId String
   compras Compra[]
   createdAt DateTime @default(now()) @map("created_at")
@@ -46,7 +46,7 @@ model TipoUsuario {
 model Compra {
   id           String    @id @default(uuid()) @db.Char(40)
   usuarioId    String    @db.Char(40)
-  usuario      Usuario   @relation(fields: [usuarioId], references: [id])
+  usuario      Usuario   @relation(fields: [usuarioId], references: [id], onDelete: Cascade)
   carrinho     CompraItem[]
   createdAt    DateTime  @default(now()) @map("created_at")
   updatedAt    DateTime  @updatedAt @map("updated_at")
@@ -57,9 +57,9 @@ model Compra {
 model CompraItem {
   id          String    @id @default(uuid()) @db.Char(40)
   compraId    String    @db.Char(40)
-  compra      Compra    @relation(fields: [compraId], references: [id])
+  compra      Compra    @relation(fields: [compraId], references: [id], onDelete: Cascade)
   produtoId   String    @db.Char(40)
-  produto     Produto   @relation(fields: [produtoId], references: [id])
+  produto     Produto   @relation(fields: [produtoId], references: [id], onDelete: Cascade)
   quantidade  Int
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
