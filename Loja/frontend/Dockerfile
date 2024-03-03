@@ -5,6 +5,7 @@ WORKDIR /app
 COPY package.json ./
 
 RUN npm install
+RUN mkdir -p app/.next && chmod -R 777 app/.next
 
 RUN chown -R node.node /app
 
