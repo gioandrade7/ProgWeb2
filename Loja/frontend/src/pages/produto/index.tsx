@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-key */
 import { getAllProdutos } from "@/fakeDb/produto"
 import styles from './produto.module.css'
+import Link from "next/link"
 
 
 export default function Home() {
@@ -8,12 +9,15 @@ export default function Home() {
   return (
     <div>
       <h1>Produtos</h1>
-        <ul>{produtos.map((prod) => (
-          <li className={styles.listaProdutos}>{ prod.nome }</li>
+      <ul>
+        {produtos.map((prod) => (
+          <li key={prod.id} className={styles.listaProdutos}>
+            <Link href={`/produto/${prod.id}`}>{prod.nome}</Link>
+          </li>
         ))}
       </ul>
     </div>
-  )
+  );
 }
 
 
