@@ -5,8 +5,9 @@ import cookieParser from 'cookie-parser';
 import { v4 as uuidv4} from "uuid"
 import session from 'express-session';
 import swaggerUi from "swagger-ui-express";
-import swaggerFile from "./swagger-output.json";
+import cors from 'cors';
 
+import swaggerFile from "./swagger-output.json";
 import validateEnv from "./utils/validateEnv";
 import router from "./router";
 import setCookieLang from './middlewares/setCookieLanguage';
@@ -28,6 +29,7 @@ validateEnv();
 const app = express();
 const PORT = process.env.PORT || 4455;
 
+app.use(cors())
 app.use(morgan('combined'));
 app.use(express.json())
 app.use(cookieParser())

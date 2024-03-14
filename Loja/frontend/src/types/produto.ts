@@ -4,3 +4,6 @@ export interface Produto {
     preco: number,
     estoque:number
 }
+
+export type CreateProdutoDto = Pick<Produto, "nome" | "estoque" | "preco">
+export type UpdateProdutoDto = Pick<Produto, "nome" | "estoque" | "preco">

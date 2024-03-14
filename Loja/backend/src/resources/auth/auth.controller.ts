@@ -6,7 +6,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes"
 import checkCredentials from "./auth.service"
 
 
-const singup = async (req: Request, res: Response)  => {
+const signup = async (req: Request, res: Response)  => {
     const usuario: SingupDTO = req.body 
     try{
         const novoUsuario = await createUsuario({ ...usuario, tipoUsuarioId: TiposUsuarios.CLIENT})
@@ -41,4 +41,4 @@ const logout = (req: Request, res: Response) => {
 }
 
 
-export default { singup, login, logout }
+export default { signup, login, logout };

@@ -3,12 +3,10 @@ import { useRouter } from 'next/router'
 import ProdutoCard from '@/components/produto/ProdutoCard'
 import { getOneProduto } from '@/fakeDb/produto'
 
-function Produto() {
+function ProdutoCardPage() {
     const router = useRouter()
-    const produtoId = parseInt(router.query.produtoId as string)
-    const produto = getOneProduto(produtoId)
-    if (!produto) return <div>Produto não existente !</div>
-    return <ProdutoCard produto={produto} />;
+    const id = router.query.produtoId as string
+    return <ProdutoCard id={id} />;
 }
 
-export default Produto
+export default ProdutoCardPage;

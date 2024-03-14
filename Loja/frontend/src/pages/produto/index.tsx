@@ -1,26 +1,8 @@
-/* eslint-disable react/jsx-key */
-import { getAllProdutos } from "@/fakeDb/produto"
-import styles from './produto.module.css'
-import Link from "next/link"
+import React from 'react'
+import ProdutoIndex from '@/components/produto/ProdutoIndex';
 
-
-export default function Home() {
-  const produtos = getAllProdutos()
-  return (
-    <div>
-      <h1>Produtos</h1>
-      <ul>
-        {produtos.map((prod) => (
-          <li key={prod.id} className={styles.listaProdutos}>
-            <Link href={`/produto/${prod.id}`}>{prod.nome}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+ function ProdutoIndexPage() {
+  return <ProdutoIndex />;
 }
 
-
-
-
-
+export default ProdutoIndexPage;

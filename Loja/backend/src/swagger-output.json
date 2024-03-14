@@ -153,10 +153,14 @@
         "tags": [
           "Produto"
         ],
+        "summary": "Lista os produtos na base.",
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Produtos"
+            },
+            "description": "OK"
           }
         }
       },
@@ -164,24 +168,23 @@
         "tags": [
           "Produto"
         ],
+        "summary": "Adiciona um novo produto na base.",
         "description": "",
         "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/CreateProduto"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Produto"
+            },
+            "description": "OK"
           }
         }
       }
@@ -191,18 +194,25 @@
         "tags": [
           "Produto"
         ],
+        "summary": "Retorna as informações de um produto na base.",
         "description": "",
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "req.params",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/ReadProduto"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Produto"
+            },
+            "description": "OK"
           }
         }
       },
@@ -210,30 +220,32 @@
         "tags": [
           "Produto"
         ],
+        "summary": "Altera um produto na base.",
         "description": "",
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "req.params",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/ReadProduto"
+            }
           },
           {
             "name": "body",
             "in": "body",
             "schema": {
-              "type": "object",
-              "properties": {
-                "nome": {
-                  "example": "any"
-                }
-              }
+              "$ref": "#/definitions/CreateProduto"
             }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UpdateProduto"
+            },
+            "description": "OK"
           }
         }
       },
@@ -241,18 +253,25 @@
         "tags": [
           "Produto"
         ],
+        "summary": "Remove um produto da base.",
         "description": "",
         "parameters": [
           {
             "name": "id",
-            "in": "path",
+            "in": "req.params",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/ReadProduto"
+            }
           }
         ],
         "responses": {
-          "default": {
-            "description": ""
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/UpdateProduto"
+            },
+            "description": "OK"
           }
         }
       }
@@ -339,6 +358,18 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -363,6 +394,150 @@
         "responses": {
           "default": {
             "description": ""
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ReadProduto": {
+      "type": "string",
+      "example": "8a2053de-5d92-4c43-97c0-c9b2b0d56703"
+    },
+    "CreateProduto": {
+      "type": "object",
+      "properties": {
+        "nome": {
+          "type": "string",
+          "example": "Martelo"
+        },
+        "preco": {
+          "type": "number",
+          "example": 29
+        },
+        "estoque": {
+          "type": "number",
+          "example": 10
+        }
+      }
+    },
+    "UpdateProduto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "8a2053de-5d92-4c43-97c0-c9b2b0d56703"
+        },
+        "nome": {
+          "type": "string",
+          "example": "Martelo"
+        },
+        "preco": {
+          "type": "number",
+          "example": 29
+        },
+        "estoque": {
+          "type": "number",
+          "example": 10
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2023-11-07T19:27:15.645Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2023-11-07T19:27:15.645Z"
+        }
+      }
+    },
+    "Produto": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "8a2053de-5d92-4c43-97c0-c9b2b0d56703"
+        },
+        "nome": {
+          "type": "string",
+          "example": "Bacon"
+        },
+        "preco": {
+          "type": "number",
+          "example": 261
+        },
+        "estoque": {
+          "type": "number",
+          "example": 1
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2023-11-07T19:27:15.645Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2023-11-07T19:27:15.645Z"
+        }
+      }
+    },
+    "Produtos": {
+      "type": "object",
+      "properties": {
+        "produto1": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "9a2053de-5d92-4c43-97c0-c9b2b0d56703"
+            },
+            "nome": {
+              "type": "string",
+              "example": "Queijo"
+            },
+            "preco": {
+              "type": "number",
+              "example": 40
+            },
+            "estoque": {
+              "type": "number",
+              "example": 1
+            },
+            "createdAt": {
+              "type": "string",
+              "example": "2023-11-07T19:27:15.645Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "example": "2023-11-07T19:27:15.645Z"
+            }
+          }
+        },
+        "produto2": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "example": "8a2053de-5d92-4c43-97c0-c9b2b0d56703"
+            },
+            "nome": {
+              "type": "string",
+              "example": "Bacon"
+            },
+            "preco": {
+              "type": "number",
+              "example": 261
+            },
+            "estoque": {
+              "type": "number",
+              "example": 1
+            },
+            "createdAt": {
+              "type": "string",
+              "example": "2023-11-07T19:27:15.645Z"
+            },
+            "updatedAt": {
+              "type": "string",
+              "example": "2023-11-07T19:27:15.645Z"
+            }
           }
         }
       }
