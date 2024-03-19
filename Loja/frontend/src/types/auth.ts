@@ -1,3 +1,8 @@
+export interface Auth{
+    nome:string
+    tipoUsuario: "admin" | "client"
+}
+
 interface Usuario {
     id: string;
     nome: string;

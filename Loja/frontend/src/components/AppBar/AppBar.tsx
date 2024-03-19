@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -7,8 +7,20 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import Link from "next/link";
+import { AuthContext } from "@/provider/AuthProvider";
+import api from "@/utils/api";
+import { useRouter } from "next/router";
 
 export default function ButtonAppBar() {
+  const { auth, setAuth } = useContext(AuthContext);
+  const router = useRouter()
+  const onLogout = () => {
+    api.post("/logout", undefined, {withCredentials: true})
+    .then((data) => {
+      setAuth(null)
+      router.push("/produto")
+    })
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,9 +37,24 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Minha Loja
           </Typography>
-          <Button component={Link} href="/produto"color="inherit">Produtos</Button>
-          <Button component={Link} href="/auth/signup"color="inherit">Sign Up</Button>
-          <Button color="inherit">Login</Button>
+          <Button component={Link} href="/produto" color="inherit">
+            Produtos
+          </Button>
+          {!auth && (
+            <>
+              <Button component={Link} href="/auth/signup" color="inherit">
+                Sign Up
+              </Button>
+              <Button component={Link} href="/auth/login" color="inherit">
+                Login
+              </Button>
+            </>
+          )}
+          {auth && (
+            <Button onClick={onLogout} color="inherit">
+              Logout [{auth.nome}]
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
     </Box>

@@ -24,7 +24,7 @@ const login = async (req: Request, res: Response) => {
         if(! usuario) return res.status(StatusCodes.UNAUTHORIZED).json(ReasonPhrases.UNAUTHORIZED);
         req.session.uid = usuario.id
         req.session.tipoUsuarioId = usuario.tipoUsuarioId
-        res.status(StatusCodes.OK).json(req.session.uid)
+        res.status(StatusCodes.OK).json({nome: usuario.nome, tipoUsuario: usuario.tipoUsuarioId === TiposUsuarios.CLIENT ? 'client' : 'admin'})
     } 
     catch (error) {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);
